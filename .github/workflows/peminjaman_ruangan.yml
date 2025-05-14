@@ -1,0 +1,28 @@
+name: Download File from API
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  download_file:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Download file from API
+        run: |
+          curl -L -o namafile.pdf "https://amruazzam.postman.co/workspace/NFA~b3afc362-2d1e-4de8-81bd-6f48c733b426/collection/44545441-438ae88a-3e76-4c25-a508-9db14dcea82e?action=share&source=copy-link&creator=44560827
+          "
+
+      - name: Commit downloaded file
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add peminjaman_ruangan.sql
+          git commit -m "Add file downloaded from API"
+          git push
+
